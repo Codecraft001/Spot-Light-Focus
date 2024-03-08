@@ -1,0 +1,84 @@
+
+ 
+ :root {
+	--black: oklch(17.7% 0.105 262.48);
+	--purple: oklch(60% 0.37 294.7);
+	--orange: oklch(60% 0.37 64.65);
+	--yellow: oklch(60% 0.37 109.08);
+	--blue: oklch(60% 0.37 237.06);
+	--black-alpha-50: color-mix(in oklch, 
+	var(--black), transparent);
+ }
+
+ @property --gradient-angle {
+	inherits: false;
+	initial-value: 0deg;
+	syntax: "<angle>";
+ }
+
+ @keyframes spin {
+	to {
+	--gradient-angle: 360deg;
+	}
+ }
+
+ body {
+	margin: 0;
+ }
+
+ section {
+	background: black;
+	display: grid;
+	width: 100vw;
+	height: 100svh;
+	place-content: center;
+ }
+
+ div {
+	animation: spin 2s linear infinite;
+	background: linear-gradient(to bottom, var(--black),
+	var(--black)) padding-box,
+	conic-gradient(
+	in oklch from var(--gradient-angle),
+	var(--purple),
+	var(--orange),
+	var(--yellow),
+	var(--blue),
+	var(--purple)
+	)
+	
+	 border-box;
+	 border: 5px solid transparent;
+	 border-radius: 20px;
+	 position: relative;
+	 width: 300px;
+	 height: 200px;
+	 z-index: 10;
+
+	 &::before {
+	 background: black;
+	 border-radius: 15px;
+	 content: "";
+	 position: absolute;
+	 inset: 0;
+	 z-index: 5;
+	 }
+
+	 &::after {
+		animation: spin 2s linear infinite;
+		background: conic-gradient(
+		in oklch from var(--gradient-angle),
+		var(--purple),
+		var(--orange),
+		var(--yellow),
+		var(--blue),
+		var(--purple)
+		);
+		border-radius: 15px;
+		content: "";
+		position: absolute;
+		inset: 0;
+		filter: blur(50px);
+		z-index: 1;
+	  }
+     }
